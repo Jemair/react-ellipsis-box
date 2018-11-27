@@ -1,0 +1,81 @@
+@w: 50px; // width of the ellipsis words
+@h: 23px; // line-height
+@n: 4; // count of rows
+@fz: 16px; // font-size
+
+.ellipsis {
+  overflow: hidden;
+  &.folded {
+    max-height: @h * @n;/* h*n */
+    overflow: hidden;
+    .content {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-box-pack: center;
+      -webkit-line-clamp: @n;/* max row number n */
+      text-overflow: ellipsis;
+      overflow: hidden;
+      .more {
+        display: block;
+      }
+    }
+  }
+}
+
+.content {
+  position: relative;
+  word-break: break-all;
+  word-wrap: break-word;
+  font-size: @w;/* w */
+  line-height: @h;/* line-height h */
+  vertical-align: top;
+  pointer-events: none;
+}
+
+.text, .text *{
+  pointer-events: auto;
+  display: inline;
+  vertical-align: top;
+  font-size: @fz;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  &::before {
+    content: "";
+    display: block;
+    float: left;
+    width: 50%;
+    height: 100%;
+  }
+}
+.placeholder {
+  float: left;
+  width: 50%;
+  height: @h * @n;/* h*n */
+}
+.more {
+  display: none;
+  pointer-events: auto;
+  vertical-align: top;
+  position: relative;
+  top: -@h;/* -h */
+  left: -@w;/* -w */
+  float: left;
+  width: @w;/* width of the .more w */
+  height: @h;/* h */
+  font-size: @fz;
+}
+
+.link {
+  pointer-events: auto;
+  vertical-align: top;
+  position: relative;
+  font-size: @fz;
+  color: #5090cc;
+}
